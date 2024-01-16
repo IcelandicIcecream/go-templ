@@ -1,0 +1,26 @@
+package user
+
+import (
+	"github.com/icelandicicecream/htmx-go/views/layout"
+	"github.com/icelandicicecream/htmx-go/views/components"
+	"github.com/icelandicicecream/htmx-go/model"
+)
+
+func getUser(c context.Context) string {
+	user, ok := c.Value("user").(string)
+	if !ok {
+		return ""
+	}
+	return user
+
+}
+
+templ Show(user model.User) {
+	@layout.Base() {
+		<h1>Hello { getUser(ctx) }!</h1>
+		@components.Input(model.InputProps{
+      InputType: "text",
+      Name: "name",
+    })
+	}
+}
